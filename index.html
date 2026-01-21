@@ -1,169 +1,1092 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nilesh Mishra | Portfolio</title>
+    <title>Nilesh Mishra | Java Backend Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    <!-- SEO -->
-    <meta name="description" content="Software Developer portfolio of Nilesh Mishra showcasing projects in Java, Python, Web Development, Firebase and AI-powered applications." />
+      :root {
+        --bg-primary: #030b10; /* dark blue-green */
+        --bg-secondary: #071a24; /* cyber navy */
 
-    <!-- Open Graph (LinkedIn Preview) -->
-    <meta property="og:title" content="Personal Portfolio | Nilesh Mishra" />
-    <meta property="og:description" content="Java Full Stack Developer | AI & Firebase Projects | Web Development" />
-    <meta property="og:image" content="https://nile-droid.github.io/portfolio/assets/profile.png" />
-    <meta property="og:url" content="https://nile-droid.github.io/portfolio/" />
-    <meta property="og:type" content="website" />
+        --text-primary: #eaffff;
+        --text-secondary: #9fd7e5;
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        --accent-gold: #00ff9c; /* main neon green */
+        --accent-gold-dark: #00c9ff; /* blue highlight */
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
+        --accent-alt: #b983ff; /* purple for special stuff */
 
-<body>
+        --glow: 0 0 20px rgba(0, 255, 156, 0.4);
+        --glow-strong: 0 0 40px rgba(0, 201, 255, 0.6);
+      }
 
-<!-- NAVBAR -->
-<header>
-    <div class="logo">NM</div>
-    <nav>
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1rem 5%;
+        backdrop-filter: blur(20px);
+        background: rgba(10, 10, 10, 0.1);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        background: rgba(10, 10, 10, 0.95);
+        padding: 0.5rem 5%;
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent-gold), #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: var(--accent-gold);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--text-primary);
+        transition: 0.3s;
+      }
+
+      /* HERO SECTION */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+        position: relative;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        width: 100%;
+      }
+
+      .hero-text h1 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 900;
+        line-height: 0.9;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--accent-gold)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-text .subtitle {
+        font-size: 1.3rem;
+        color: var(--text-secondary);
+        font-weight: 400;
+        margin-bottom: 2rem;
+      }
+
+      .hero-text .intro {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        max-width: 500px;
+      }
+
+      .profile-img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(212, 175, 55, 0.3);
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform: translateX(100px) scale(0.8) rotate(-10deg);
+        opacity: 0;
+        position: relative;
+      }
+
+      .profile-img.animate {
+        transform: translateX(0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.05) rotate(5deg);
+        box-shadow: var(--glow-strong);
+        border-color: var(--accent-gold);
+      }
+
+      /* CTA BUTTON */
+      .cta-btn {
+        background: linear-gradient(
+          135deg,
+          var(--accent-gold),
+          var(--accent-gold-dark)
+        );
+        color: var(--bg-primary);
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        text-decoration: none;
+      }
+
+      .cta-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .cta-btn:hover::before {
+        left: 100%;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--glow);
+      }
+
+      /* SECTIONS */
+      section {
+        padding: 120px 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 4rem;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--accent-gold)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      /* ABOUT SECTION */
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .stat-item {
+        text-align: center;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--accent-gold), #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: block;
+      }
+
+      /* SKILLS HUD SECTION */
+      .skills-hud {
+        position: relative;
+        min-height: 800px;
+      }
+
+      .hud-container {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hud-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        width: 100%;
+      }
+
+      .skill-category {
+        background: rgba(26, 26, 26, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 20px;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      .skill-category::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(212, 175, 55, 0.1),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .skill-category:hover::before {
+        left: 100%;
+      }
+
+      .skill-category:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--glow-strong);
+        border-color: var(--accent-gold);
+      }
+
+      .category-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: var(--accent-gold);
+        position: relative;
+      }
+
+      .skill-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .skill-name {
+        font-weight: 500;
+      }
+
+      .skill-bar {
+        width: 120px;
+        height: 4px;
+        background: rgba(212, 175, 55, 0.3);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .skill-progress {
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--accent-gold),
+          var(--accent-gold-dark)
+        );
+        width: 0%;
+        border-radius: 2px;
+        transition: width 2s ease;
+        position: relative;
+      }
+
+      .skill-progress::after {
+        content: attr(data-progress);
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--bg-primary);
+      }
+
+      /* PROJECTS SECTION */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: rgba(26, 26, 26, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 20px;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        opacity: 0;
+        transform: translateY(50px);
+        cursor: pointer;
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-gold),
+          var(--accent-gold-dark)
+        );
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+
+      .project-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .project-card:hover {
+        transform: translateY(-15px);
+        box-shadow: var(--glow-strong);
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .tech-tag {
+        background: rgba(212, 175, 55, 0.2);
+        color: var(--accent-gold);
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      /* CONTACT SECTION */
+      .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: rgba(26, 26, 26, 0.5);
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      .contact-item:hover {
+        background: rgba(212, 175, 55, 0.1);
+        transform: translateX(10px);
+        box-shadow: var(--glow);
+      }
+
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-gold),
+          var(--accent-gold-dark)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bg-primary);
+        font-size: 1.2rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .social-link {
+        width: 50px;
+        height: 50px;
+        background: rgba(212, 175, 55, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-gold);
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: var(--accent-gold);
+        color: var(--bg-primary);
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: var(--glow);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 2rem;
+        }
+
+        .profile-img {
+          width: 250px;
+          height: 250px;
+          margin: 0 auto;
+        }
+
+        .about-content,
+        .contact-content {
+          grid-template-columns: 1fr;
+        }
+
+        .hud-grid {
+          grid-template-columns: 1fr;
+        }
+
+        section {
+          padding: 80px 5%;
+        }
+      }
+
+      /* SCROLL INDICATOR */
+      .scroll-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-gold),
+          var(--accent-gold-dark)
+        );
+        z-index: 1001;
+        transition: width 0.1s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-indicator"></div>
+
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="logo">N M</div>
+        <ul class="nav-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </nav>
-</header>
 
-<!-- HERO -->
-<section id="home" class="hero">
-    <div class="hero-text">
-        <h1>Hi, I'm <span>Nilesh Mishra</span></h1>
-        <h2>Software Developer | BSc IT</h2>
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h2>Nilesh Mishra</h2>
+          <p class="subtitle">Software Engineer | BSc IT</p>
+          <p class="intro">
+            Software Developer (Fresher) with strong interest in Java and web
+            development. Skilled in building practical projects and using AI
+            tools to improve productivity and code quality. Focused on learning,
+            experimenting, and creating real-world solutions.
+          </p>
+          <a href="#contact" class="cta-btn">
+            <i class="fas fa-rocket"></i>
+            Explore My Work
+          </a>
+        </div>
+        <img
+          src="assets/profileee.jpg"
+          alt="Nilesh Mishra"
+          class="profile-img"
+          id="profileImg"
+        />
+      </div>
+    </section>
 
-        <p>
-            Driven software developer crafting scalable, production-ready applications
-            using <strong>Java, Python, modern web technologies, cloud backends, and AI-powered APIs.</strong>
-        </p>
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            BSc IT undergraduate from Mumbai University with a strong foundation
+            in Core Java 8 and backend development. I specialize in building
+            scalable, production-ready applications using clean architecture
+            principles.
+          </p>
+          <p>
+            Experienced with Hibernate ORM, MySQL, and DAO design patterns.
+            Passionate about database optimization, REST APIs, and creating
+            systems that handle real-world scale and complexity.
+          </p>
+          <p>
+            Currently working on AI-powered health applications and banking
+            systems, focusing on ACID compliance, performance optimization, and
+            production-grade engineering practices.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number">2026</span>
+            <p>Graduation</p>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5+</span>
+            <p>Projects</p>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">1+</span>
+            <p>Years Coding</p>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <p>Result's as a Sofware Developer</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div class="buttons">
-            <a href="#projects" class="btn primary">View Projects</a>
-            <a href="#contact" class="btn primary">Get in Touch</a>
-            <a href="https://www.linkedin.com/in/nilesh-mishra-b23a18282/" target="_blank" class="btn primary">
-                LinkedIn
+    <section id="skills" class="skills-hud">
+      <div class="hud-container">
+        <h2 class="section-title">Tech Arsenal</h2>
+        <div class="hud-grid">
+          <div class="skill-category" data-category="backend">
+            <div class="category-title">Backend Core</div>
+            <div class="skill-item">
+              <span class="skill-name">Java 8</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="95%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Hibernate ORM</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="90%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">DAO Pattern</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="88%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">JDBC</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="85%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category" data-category="databases">
+            <div class="category-title">Databases</div>
+            <div class="skill-item">
+              <span class="skill-name">MySQL</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="92%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Firebase</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="87%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Supabase</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="80%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category" data-category="frontend">
+            <div class="category-title">Frontend</div>
+            <div class="skill-item">
+              <span class="skill-name">HTML5/CSS3</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">JavaScript</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="82%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">React (Basic)</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="70%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Bootstrap</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="80%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category" data-category="tools">
+            <div class="category-title">Tools & Concepts</div>
+            <div class="skill-item">
+              <span class="skill-name">Git/GitHub</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="90%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Maven</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">REST APIs</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="88%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">OOPs/DBMS</span>
+              <div class="skill-bar">
+                <div class="skill-progress" data-progress="92%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3 class="project-title">SnackTrack</h3>
+          <div class="project-tech">
+            <span class="tech-tag">Java 8</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Gemini AI</span>
+            <span class="tech-tag">RapidAPI</span>
+          </div>
+          <p>
+            AI-powered nutrition & fitness platform with food image recognition,
+            personalized diet plans, workout guidance, BMI calculator, and
+            intelligent chatbot. Production-grade backend with real-time
+            database.
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem">
+            <a
+              href="#"
+              class="cta-btn"
+              style="padding: 0.7rem 1.5rem; font-size: 0.9rem"
+            >
+              <i class="fab fa-github"></i> Code
             </a>
-        </div>
-    </div>
-
-    <div class="hero-img">
-        <div class="img-float">
-            <img src="assets/profile.png" alt="Nilesh Mishra">
-        </div>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-    <h2>About Me</h2>
-    <p class="section-desc">
-        BSc IT undergraduate with hands-on experience in Java (Core & Advanced),
-        SQL, and full-stack web development. Skilled in HTML5, CSS3, JavaScript,
-        Bootstrap, Python, RESTful API development, and backend frameworks.
-        Experienced in Firebase, Supabase, relational databases, and AI
-        integrations using Gemini API.
-    </p>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-    <h2>Skills</h2>
-
-    <div class="skill-category">
-        <h3>Programming Languages</h3>
-        <div class="skill-grid">
-            <div class="skill-card">Java (Core & Advanced)</div>
-            <div class="skill-card">Python</div>
-            <div class="skill-card">C</div>
-        </div>
-    </div>
-
-    <div class="skill-category">
-        <h3>Web Technologies</h3>
-        <div class="skill-grid">
-            <div class="skill-card">HTML5</div>
-            <div class="skill-card">CSS3</div>
-            <div class="skill-card">JavaScript</div>
-            <div class="skill-card">Bootstrap</div>
-            <div class="skill-card">React (Basic)</div>
-        </div>
-    </div>
-
-    <div class="skill-category">
-        <h3>Databases & Backend</h3>
-        <div class="skill-grid">
-            <div class="skill-card">MySQL</div>
-            <div class="skill-card">Firebase</div>
-            <div class="skill-card">Supabase</div>
-        </div>
-    </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-    <h2>Projects</h2>
-
-    <div class="project-card">
-        <h3>SnackTrack – AI Nutrition & Fitness App</h3>
-
-        <p>
-            SnackTrack is an all-in-one AI-powered nutrition and fitness application
-            built using <strong>Java</strong> with <strong>Firebase Realtime Database</strong>
-            for secure data storage and real-time synchronization.
-        </p>
-
-        <p>
-            The app integrates <strong>Gemini AI API</strong> and <strong>RapidAPI</strong>
-            to deliver intelligent health insights and automation.
-        </p>
-
-        <p>
-            • Exercise guidance for every muscle group<br>
-            • Personalized diet plans (calorie deficit/surplus, veg/non-veg)<br>
-            • Weekly meal planning<br>
-            • AI photo recognition for calorie estimation<br>
-            • BMI calculator with health insights<br>
-            • AI chatbot for fitness and diet assistance
-        </p>
-
-        <span>
-            Java • Firebase • Gemini AI • RapidAPI • AI Automation
-        </span>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-    <h2>Contact</h2>
-
-    <div class="contact-card">
-        <p>
-            📞 <a href="tel:+918928212064">+91 8928212064</a>
-        </p>
-
-        <p>
-            📧 <a href="mailto:nileshboy36@gmail.com">nileshboy36@gmail.com</a>
-        </p>
-
-        <p>
-            💼 <a href="https://www.linkedin.com/in/nilesh-mishra-b23a18282/" target="_blank">
-                Connect on LinkedIn
+            <a
+              href="#"
+              class="cta-btn"
+              style="
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+                background: transparent;
+                color: var(--accent-gold);
+                border: 2px solid var(--accent-gold);
+              "
+            >
+              Live Demo
             </a>
-        </p>
+          </div>
+        </div>
 
-        <p>📍 Mumbai, India</p>
-    </div>
-</section>
+        <div class="project-card">
+          <h3 class="project-title">Banking Account System</h3>
+          <div class="project-tech">
+            <span class="tech-tag">Java 8</span>
+            <span class="tech-tag">Hibernate</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">Maven</span>
+            <span class="tech-tag">DAO</span>
+          </div>
+          <p>
+            Production-grade banking system with ACID-compliant transactions,
+            automatic account generation, full CRUD operations, overdraft
+            protection, and comprehensive audit trails. Enterprise-level
+            architecture.
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem">
+            <a
+              href="#"
+              class="cta-btn"
+              style="padding: 0.7rem 1.5rem; font-size: 0.9rem"
+            >
+              <i class="fab fa-github"></i> Code
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</body>
+    <section id="contact">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-content">
+        <div>
+          <p
+            style="
+              font-size: 1.2rem;
+              margin-bottom: 2rem;
+              color: var(--text-secondary);
+            "
+          >
+            Open to opportunities as a Software Developer. Ready to contribute
+            to real-world projects and build impactful, production-grade
+            systems.
+          </p>
+          <div class="social-links">
+            <a
+              href="https://github.com/Nile-droid"
+              class="social-link"
+              target="_blank"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/nilesh-mishra-b23a18282/"
+              class="social-link"
+              target="_blank"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:nileshboy36@gmail.com" class="social-link">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <h4>Mumbai, India</h4>
+              <p>Available for opportunities</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <h4>+91 8928212064</h4>
+              <p>Quick call preferred</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <h4>nileshboy36@gmail.com</h4>
+              <p>Response within 24h</p>
+            </div>
+          </div>
+          <a
+            href="resume/Nilesh_Mishra_Resume.pdf"
+            class="cta-btn"
+            style="margin-top: 1rem; width: fit-content"
+          >
+            <i class="fas fa-file-download"></i>
+            Download Resume
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Navbar scroll effects
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+
+        // Scroll indicator
+        const scrollIndicator = document.querySelector(".scroll-indicator");
+        const scrollPercent =
+          (window.scrollY / (document.body.scrollHeight - window.innerHeight)) *
+          100;
+        scrollIndicator.style.width = scrollPercent + "%";
+      });
+
+      // Profile image cinematic entrance
+      const profileImg = document.getElementById("profileImg");
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            profileImg.classList.add("animate");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      observer.observe(profileImg);
+
+      // Staggered animations for sections
+      const animateOnScroll = (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+
+            // Animate skill bars
+            if (entry.target.querySelector(".skill-progress")) {
+              const skillBars =
+                entry.target.querySelectorAll(".skill-progress");
+              skillBars.forEach((bar, index) => {
+                setTimeout(() => {
+                  bar.style.width = bar.getAttribute("data-progress");
+                }, index * 100);
+              });
+            }
+          }
+        });
+      };
+
+      const scrollObserver = new IntersectionObserver(animateOnScroll, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      });
+
+      // Observe all animated elements
+      document
+        .querySelectorAll(
+          ".section-title, .about-text p, .stat-item, .skill-category, .project-card, .contact-item",
+        )
+        .forEach((el) => {
+          el.style.transition = "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+          el.style.opacity = "0";
+          el.style.transform = "translateY(50px)";
+          scrollObserver.observe(el);
+        });
+
+      // Magnetic hover effects
+      const magneticElements = document.querySelectorAll(
+        ".cta-btn, .project-card, .skill-category",
+      );
+      magneticElements.forEach((el) => {
+        el.addEventListener("mousemove", (e) => {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+
+          el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        el.addEventListener("mouseleave", () => {
+          el.style.transform =
+            "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+        });
+      });
+
+      // Parallax effect for hero background (subtle)
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector(".hero");
+        if (hero) {
+          hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+      });
+
+      // Typing effect for hero subtitle (optional enhancement)
+      const subtitle = document.querySelector(".subtitle");
+      const subtitleText = subtitle.textContent;
+      subtitle.textContent = "";
+      let i = 0;
+      function typeWriter() {
+        if (i < subtitleText.length) {
+          subtitle.textContent += subtitleText.charAt(i);
+          i++;
+          setTimeout(typeWriter, 100);
+        }
+      }
+      setTimeout(typeWriter, 1000);
+    </script>
+  </body>
 </html>
