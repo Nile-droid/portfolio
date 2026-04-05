@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-blue: #00f3ff;
+  --color-neon-green: #39ff14;
+  --color-cyber-black: #030303;
+  --color-glass: rgba(255, 255, 255, 0.03);
+  
+  --font-orbitron: "Orbitron", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@layer base {
+  body {
+    @apply bg-cyber-black text-white font-inter overflow-x-hidden selection:bg-neon-green/30;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, .font-tron {
+    @apply font-orbitron tracking-widest uppercase;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-2xl;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+  }
+  
+  .glass-input {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-xl focus:border-neon-green/50 outline-none transition-all duration-500;
+  }
+
+  .neon-glow-green {
+    @apply shadow-[0_0_20px_rgba(57,255,20,0.2)] hover:shadow-[0_0_40px_rgba(57,255,20,0.5)] transition-all duration-700;
+  }
+
+  .neon-glow-blue {
+    @apply shadow-[0_0_20px_rgba(0,243,255,0.2)] hover:shadow-[0_0_40px_rgba(0,243,255,0.5)] transition-all duration-700;
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px rgba(57,255,20,0.5);
+  }
+
+  .text-glow-blue {
+    text-shadow: 0 0 10px rgba(0,243,255,0.5);
+  }
+}
+
+/* Typing Cursor Animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor::after {
+  content: '|';
+  margin-left: 2px;
+  @apply text-neon-green animate-[blink_0.8s_infinite];
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float-slow {
+  animation: float 10s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.transition-expo {
+  transition-timing-function: var(--ease-expo);
+}
