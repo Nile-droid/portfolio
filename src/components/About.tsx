@@ -1,107 +1,72 @@
-import { useRef } from 'react';
 import { motion } from 'framer-motion';
 
-const FloatingAbout = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const cards = [
-    { title: "Status", value: "Available for Roles", desc: "Open to full-time Software & DevOps engineering opportunities.", delay: 0.1 },
-    { title: "Identity", value: "Developer & Explorer", desc: "BSc IT (Mumbai University, 2026). Passionate about high-end UI and Scalable Systems.", delay: 0.2 },
-    { title: "Location", value: "Global / remote", desc: "Based in Mumbai, India. Operating in zero-gravity digital space.", delay: 0.3 },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        ease: [0.19, 1, 0.22, 1] as const
-      }
-    }
-  };
+const About = () => {
+  const easeExpo = [0.19, 1, 0.22, 1] as const;
 
   return (
-    <section ref={containerRef} className="py-32 px-10 max-w-7xl mx-auto relative overflow-hidden" id="about">
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="flex flex-col md:flex-row gap-20 items-center"
-      >
-        <div className="flex-1 space-y-10">
-          <motion.div variants={itemVariants} className="flex items-center gap-4">
-            <div className="w-10 h-[1px] bg-neon-green" />
-            <span className="text-neon-green font-orbitron tracking-[0.5em] text-[10px] uppercase">About_Identity [01]</span>
-          </motion.div>
-          
-          <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter">
-            ARCHITECTING <br/>THE <span className="text-neon-green">FUTURE_OS</span>
-          </motion.h2>
-
-          <motion.div variants={itemVariants} className="space-y-6">
-            <p className="text-gray-400 leading-relaxed text-lg max-w-xl font-inter">
-              I architect digital ecosystems where anti-gravity aesthetics meet high-performance code. Specialized in Python, Java, and the entire DevOps lifecycle. 
-            </p>
-            <p className="text-gray-400 leading-relaxed text-lg max-w-xl font-inter">
-              My mission is to build systems that are not only scalable but also visually immersive, bridging the gap between cold logic and human intuition.
-            </p>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="flex gap-10">
-            <div className="space-y-1">
-              <div className="text-white font-orbitron text-2xl font-black">2026_</div>
-              <div className="text-neon-green font-orbitron text-[8px] uppercase tracking-widest opacity-50">GRADUATE_EXPECTED</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-white font-orbitron text-2xl font-black">15+_</div>
-              <div className="text-neon-green font-orbitron text-[8px] uppercase tracking-widest opacity-50">CORE_MODULES_BUILT</div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
-          {cards.map((card, idx) => (
+    <section className="py-32 px-10 max-w-7xl mx-auto relative z-10" id="about">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+        
+        {/* Left Side: Graphic / Abstract */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: easeExpo }}
+          viewport={{ once: true }}
+          className="relative h-[400px] w-full glass-panel overflow-hidden border-gradient flex items-center justify-center p-10"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent pointer-events-none" />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="w-64 h-64 border border-white/10 rounded-full flex items-center justify-center"
+          >
             <motion.div
-              key={idx}
-              variants={itemVariants}
-              whileHover={{ 
-                y: -10, 
-                scale: 1.02,
-                borderColor: 'rgba(57,255,20,0.4)',
-                boxShadow: '0 0 40px rgba(57,255,20,0.1)'
-              }}
-              className="glass-panel p-10 space-y-6 transition-all duration-700 interactive group relative overflow-hidden"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="w-48 h-48 border border-white/20 rounded-full flex items-center justify-center border-t-[#ff6b6b] border-b-[#00d2d3]"
             >
-              <div className="w-8 h-1 bg-neon-green rounded-full group-hover:w-full transition-all duration-700 ease-[0.19,1,0.22,1]" />
-              <div className="text-[10px] font-orbitron text-neon-green uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">{card.title}</div>
-              <div className="text-xl font-black text-white group-hover:text-glow-green transition-all">{card.value}</div>
-              <div className="text-xs text-gray-400 group-hover:text-white/80 transition-colors leading-relaxed">{card.desc}</div>
-              
-              {/* Internal Glow on Hover */}
-              <div className="absolute inset-0 bg-neon-green/0 group-hover:bg-neon-green/[0.02] transition-colors pointer-events-none" />
+              <div className="w-24 h-24 bg-gradient-primary rounded-full blur-xl opacity-50" />
             </motion.div>
-          ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Right Side: Content */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: easeExpo }}
+          viewport={{ once: true }}
+          className="space-y-8"
+        >
+          <div className="space-y-2">
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">ABOUT_ME</h2>
+            <div className="w-32 h-1 bg-gradient-primary rounded-full" />
+          </div>
+
+          <div className="space-y-6 text-gray-400 font-inter leading-relaxed">
+            <p>
+              I am a BSc IT student and aspiring DevOps Engineer with a strong foundation in Java and cloud technologies.
+            </p>
+            <p>
+              I specialize in building scalable systems, automating workflows, and working with modern DevOps tools like Docker, Kubernetes, and CI/CD pipelines.
+            </p>
+            <p>
+              I am also exploring Agentic AI systems and intelligent automation to build smarter, efficient applications that solve real-world problems.
+            </p>
+          </div>
           
-          {/* Decorative Corner Element */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-neon-green/5 blur-3xl rounded-full pointer-events-none" />
-        </div>
-      </motion.div>
+          <div className="pt-4 border-t border-white/5">
+            <div className="flex gap-4 items-center">
+              <div className="w-2 h-2 rounded-full bg-[#00d2d3] animate-pulse" />
+              <span className="text-[10px] font-orbitron tracking-widest uppercase text-white/50">Available for Opportunities</span>
+            </div>
+          </div>
+        </motion.div>
+
+      </div>
     </section>
   );
 };
 
-export default FloatingAbout;
+export default About;
